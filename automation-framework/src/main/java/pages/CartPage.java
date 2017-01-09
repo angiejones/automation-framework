@@ -62,7 +62,7 @@ public class CartPage extends Page {
 		}
 
 		if(failIfNotFound){
-			Assert.fail(productName + " is not in the cart");
+			throw new IllegalStateException("Product " + productName + " is not in the cart");
 		}
 
 		return null;

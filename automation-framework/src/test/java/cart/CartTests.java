@@ -12,7 +12,7 @@ public class CartTests extends BaseTests{
 	@Test
 	public void testIncreaseQuantity(){
 		String productName = "Apple TV";
-		CartServices.addProductToCart(productName);
+		CartServices.addProductToCart(productName, getWebDriver());
 
 		CartPage cartPage = homePage.clickCart();
 		cartPage = cartPage.updateQuantity(productName, 3);

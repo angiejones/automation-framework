@@ -2,6 +2,7 @@ package cucumber.stepdefs;
 
 import cucumber.api.java.en.Given;
 import pages.Page;
+import utils.BaseTests;
 import widgets.SearchResults;
 
 public class BaseStepDefs {
@@ -12,7 +13,7 @@ public class BaseStepDefs {
 	protected SearchResults searchResults;
 
 	public BaseStepDefs() {
-		currentPage = new Page();
+		currentPage = new Page(BaseTests.getWebDriver());
 	}
 
 	@Given("^there is a product named (.*)$")

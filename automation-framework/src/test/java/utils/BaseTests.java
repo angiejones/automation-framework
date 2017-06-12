@@ -17,7 +17,7 @@ public class BaseTests {
 		setChromeDriverProperty();
 		webDriver = new ChromeDriver();
 		webDriver.get(Links.HOME);
-		homePage = new Page();
+		homePage = new Page(webDriver);
 	}
 
 	@AfterClass
@@ -30,7 +30,11 @@ public class BaseTests {
 	}
 
 	private static void setChromeDriverProperty(){
-		System.setProperty(
-				"webdriver.chrome.driver", "resources/chromedriver.exe");
+		if(System.getProperty("os.name").contains("Windows")) {
+			System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
+		}
+		else{
+			System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+		}
 	}
 }

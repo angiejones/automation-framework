@@ -24,12 +24,12 @@ public class Page {
 
 	public CartPage clickCart(){
 		webDriver.findElement(cart).click();
-		return new CartPage();
+		return new CartPage(webDriver);
 	}
 
 	public AccountPage clickMyAccount(){
 		webDriver.findElement(account).click();
-		return new AccountPage();
+		return new AccountPage(webDriver);
 	}
 
 	public Page clickMenuItem(String menuItem){

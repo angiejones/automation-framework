@@ -15,14 +15,13 @@ public class SearchResults {
 
 	private WebDriver webDriver;
 
-	By addToCartButton 		= By.className("wpsc_buy_button");
-	By currentPrice			= By.className("currentprice");
-	By goToCheckoutButton	= By.className("go_to_checkout");
-	By grid 				= By.xpath(".//div[contains(@class, 'product_grid_display')]");
-	By notificationPopUp	= By.id("fancy_notification");
-	By originalPrice		= By.className("oldprice");
-	By products 			= By.xpath(".//div[contains(@class, 'product_grid_item')]");
-	By productTitle 		= By.xpath(".//h2[@class='prodtitle']/a");
+	private By addToCartButton 		= By.className("wpsc_buy_button");
+	private By currentPrice			= By.className("currentprice");
+	private By goToCheckoutButton	= By.className("go_to_checkout");
+	private By grid 				= By.xpath(".//div[contains(@class, 'product_grid_display')]");
+	private By originalPrice		= By.className("oldprice");
+	private By products 			= By.xpath(".//div[contains(@class, 'product_grid_item')]");
+	private By productTitle 		= By.xpath(".//h2[@class='prodtitle']/a");
 
 
 	public SearchResults(WebDriver webDriver){
@@ -65,14 +64,14 @@ public class SearchResults {
 	public ProductPage clickProduct(String productName){
 		WebElement product = findProduct(productName);
 		product.findElement(productTitle).click();
-		return new ProductPage();
+		return new ProductPage(webDriver);
 	}
 
 	public CartPage addProductToCart(String productName){
 		clickAddProductToCart(productName);
 		WebDriverWait wait = new WebDriverWait(webDriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(goToCheckoutButton)).click();
-		return new CartPage();
+		return new CartPage(webDriver);
 	}
 
 	public void clickAddProductToCart(String productName){

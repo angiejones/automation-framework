@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.CartPage;
 import services.CartServices;
+import utils.BaseTests;
 
 public class CartStepDefs {
 	BaseStepDefs stepData;
@@ -19,7 +20,7 @@ public class CartStepDefs {
 	@Given("^product (.*) is in the cart$")
 	public void addProductToCartViaService(String productName){
 		stepData.productName = productName;
-		CartServices.addProductToCart(productName);
+		CartServices.addProductToCart(productName, BaseTests.getWebDriver());
 		cartPage = stepData.currentPage.clickCart();
 
 		Assert.assertTrue(productName + " added to cart", cartPage.isProductInCart(productName));
@@ -42,7 +43,7 @@ public class CartStepDefs {
 
 	@Then("^the product should be in the cart$")
 	public void verifyProductInCart(){
-		CartPage cartPage = new CartPage();
+		CartPage cartPage = new CartPage(BaseTests.getWebDriver());
 		Assert.assertTrue(stepData.productName + " is in cart", cartPage.isProductInCart(stepData.productName));
 		Assert.assertEquals("Number of items in cart", 1, cartPage.getNumberOfProducts());
 	}

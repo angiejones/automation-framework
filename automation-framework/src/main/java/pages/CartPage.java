@@ -2,8 +2,8 @@ package pages;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,16 +12,17 @@ public class CartPage extends Page {
 
 	private WebElement cart;
 
-	By cartTable					= By.className("checkout_cart");
-	By productPrice					= By.xpath(".//td[not(@class)]/span[@class='pricedisplay']");
-	By productQuantity				= By.name("quantity");
-	By productRow					= By.xpath(".//tr[contains(@class,'product_row')]");
-	By productTitle					= By.xpath(".//td[contains(@class, 'wpsc_product_name')]");
-	By productTotal					= By.xpath(".//td[contains(@class,'wpsc_product_price')]/span[@class='pricedisplay']");
-	By productUpdateQuantityButton	= By.xpath(".//input[@type='submit' and @value='Update']");
+	private By cartTable					= By.className("checkout_cart");
+	private By productPrice					= By.xpath(".//td[not(@class)]/span[@class='pricedisplay']");
+	private By productQuantity				= By.name("quantity");
+	private 	By productRow					= By.xpath(".//tr[contains(@class,'product_row')]");
+	private By productTitle					= By.xpath(".//td[contains(@class, 'wpsc_product_name')]");
+	private By productTotal					= By.xpath(".//td[contains(@class,'wpsc_product_price')]/span[@class='pricedisplay']");
+	private By productUpdateQuantityButton	= By.xpath(".//input[@type='submit' and @value='Update']");
 
 
-	public CartPage(){
+	public CartPage(WebDriver webDriver){
+		super(webDriver);
 		cart = findCartTable();
 	}
 
@@ -33,7 +34,7 @@ public class CartPage extends Page {
 		setQuantity(productName, quantity);
 		WebElement product = findProduct(productName, true);
 		product.findElement(productUpdateQuantityButton).click();
-		return new CartPage();
+		return new CartPage(webDriver);
 	}
 
 	public void setQuantity(String productName, int quantity){

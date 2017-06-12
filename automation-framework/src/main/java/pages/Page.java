@@ -6,12 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import utils.BaseTests;
 import widgets.SearchResults;
 
 public class Page {
 
-	protected WebDriver webDriver = BaseTests.getWebDriver();
+	protected WebDriver webDriver;
+
+	public Page(WebDriver webDriver){
+		  this.webDriver = webDriver;
+	}
+
 
 	By account				= By.id("account");
 	By cart					= By.id("header_cart");
@@ -30,7 +34,7 @@ public class Page {
 
 	public Page clickMenuItem(String menuItem){
 		findMenuItem(menuItem).click();
-		return new Page();
+		return new Page(webDriver);
 	}
 
 	public Page clickMenuItem(String menuItem, String submenuItem){
@@ -53,7 +57,7 @@ public class Page {
 
 	public Page goTo(String postUrl) {
 		webDriver.get(postUrl);
-		return new Page();
+		return new Page(webDriver);
 	}
 
 
